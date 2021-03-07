@@ -10,8 +10,16 @@
 
 模型定义位置 /app/Model
 
+实例化模型 构造函数不能有参数
 ```
-pip install -r requirements.txt
+  $Model = new UserModel()
+```
+添加数据
+```
+  单条
+  $data = ['title' => 'zhangxiaolong', 'sex' => 2];
+  批量
+  $Model->insert($data)
 ```
 
 ### 2、DB类
