@@ -90,30 +90,72 @@
 
 ```
   $Model->exec($sql, $where)
+  
+  成功返回影响数值，失败抛出异常
 ```
 
+事务操作：多条sql增删改查请使用事务
 
+```
+  //初始化连接
+  $Model->initConnect()
+  //获取一个PDO连接
+  $Pdo = $Model->getPdo();
+  //设定其它操作模型共用一个pdo，一定要在使用操作数据前设定模型的pdo
+  $Model2 = new Model2();
+  $Model2->setPdo($Pdo);
+  $Model3 = new Model3();
+  $Model3->setPdo($Pdo);
+  
+  $Model2->select / insert / update / count / 
+  $Model3->select / insert / update / count / increment
+  //开启事务
+  $Model->beginTransaction()
+  //提交事务
+  $Model->commit()
+  //回滚事务
+  $Model->rollback()
+  //归还pdo连接
+  $Model->return()
+  
+```
 
 ### 2、DB类
 
-在安装完所需的第三方库并配置好数据库信息之后，我们需要对数据库进行初始化。
+增删查改类似模型，初始化对象选择数据表即可操作CURD
 
-在项目路径下打开命令行界面，运行如下命令生成数据库迁移：
+ 
+实例化初始采用快捷方法db
+```
+  $data = ['title' => 'database', 'name' => 'pingo']
+  db()->table('user')->insert($data)
+```
+
+
+
+事务操作
 
 ```
-python manage.py makemigrations 
+ //初始化对象
+ $db = db()->initConnect();
+ //开启事务
+  $db->beginTransaction()
+  $db->table('tb1')->insert($data)
+  $db->table('tb2')->update($data)
+  $db->table('tb3')->delete()
+  $db->table('tb4')->decrement($data)
+  
+  //提交事务
+  $db->commit()
+  //回滚事务
+  $db->rollback()
+  //归还pdo连接
+  $db->return()
 ```
+ 
 
-运行如下命令执行数据库迁移:
-
-```
-python manage.py migrate
-```
-执行完毕之后，数据库就初始化完成了。
-
-### 3、创建管理员账户
-在初始化完数据库之后，需要创建一个管理员账户来管理整个MrDoc，在项目路径下打开命令行终端，运行如下命令：
-```
-python manage.py createsuperuser
-```
-按照提示输入用户名、电子邮箱地址和密码即可。
+### 结构化查询器
+ 
+  采用laravel 构造器形式
+  支持：where / whereIn whereNotIn  / orderBy / groupBy / select / limit / page / having /
+ 
