@@ -2,7 +2,7 @@
 
 <br>
 
-<p align="center" style="font-size:30px">
+<p align="center" >
   PingoSwoole
 </p>
 
