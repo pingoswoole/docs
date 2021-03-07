@@ -33,13 +33,17 @@
 ## 框架定位
 
 在其他 Swoole 框架都定位于大中型企业的时候，Mix 决定推动这项技术的普及，我们定位于众多的中小型企业、创业型公司，我们将 Swoole 的复杂度封装起来，用简单的编码方式呈现给用户，让更多的中级程序员也可打造高并发系统，让 Swoole 不再只是高级程序员的专利。
- 
+
+## 主要模块
+
+-- 常用后台管理（layui）
  
 ## 环境要求
 
 * Linux
 * PHP >= 7.3
 * Swoole >= 4.4.4 (websocket >= 4.4.15)
+建议采用docker-compose快速编排安装nginx/php/mysql/redis/phpmyadmin/kafka/mongodb/jenkins
 
 ## 快速开始
 
